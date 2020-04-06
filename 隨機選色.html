@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0px;
+            background: black;
+        }
+
+        .box {
+            width: 250px;
+            height: 130px;
+            /* border: 1px solid black; */
+            box-shadow: 0 0 20px white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+        }
+
+        .text {
+            display: inline-block;
+            width: 25px;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            /* overflow: hidden; */
+            width: 130px;
+            height: 5px;
+            outline: none;
+            background: rgb(164, 217, 241);
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            position: relative;
+            /* 设为相对位置，为了前后区块的绝对位置而设定 */
+            width: 10px;
+            height: 10px;
+            background: rgb(7, 116, 241);
+            border-radius: 50%;
+            transition: .2s;
+        }
+    </style>
+</head>
+
+<body id="cc">
+    <div class="box">
+        <p>　R:<input id="range1" type="range" min="0" max="255" value="0" oninput="on_input(1)">
+            <span id="text1">0</span>
+            <input type="button" value="隨機" onclick="on_click()"></p>
+
+        <p>　G:<input id="range2" type="range" min="0" max="255" value="0" oninput="on_input(2)">
+            <span id="text2">0</span>
+            <input type="button" value="隨機" onclick="on_click()"></p>
+
+        <p>　B:<input id="range3" type="range" min="0" max="255" value="0" oninput="on_input(3)">
+            <span id="text3">0</span>
+            <input type="button" value="隨機" onclick="on_click()"></p>
+    </div>
+
+    <script>
+        //抓取range bar的值
+        //若aa=1，表示來源為第1個range bar
+        //若aa=2，表示來源為第2個range bar
+        //若aa=3，表示來源為第2個range bar
+        function on_input(aa) {
+            let val = document.getElementById('range' + aa).value;
+            document.getElementById('text' + aa).innerText = val;
+
+            let range1 = document.getElementById('range1').value;
+            let range2 = document.getElementById('range2').value;
+            let range3 = document.getElementById('range3').value;
+            let cc = document.getElementById("cc")
+            cc.style.backgroundColor = `rgb(${range1},${range2},${range3})`
+        }
+
+        function on_click() {
+            let r = Math.floor(Math.random() * 255)
+            let g = Math.floor(Math.random() * 255)
+            let b = Math.floor(Math.random() * 255)
+
+            document.getElementById('text1').innerText = r
+            document.getElementById('text2').innerText = g
+            document.getElementById('text3').innerText = b
+            document.getElementById('range1').value = r
+            document.getElementById('range2').value = g
+            document.getElementById('range3').value = b
+
+
+            // let range1 = document.getElementById('range1').value;
+            // let range2 = document.getElementById('range2').value;
+            // let range3 = document.getElementById('range3').value;
+            let cc = document.getElementById("cc")
+            cc.style.backgroundColor = `rgb(${r},${g},${b})`
+        }
+    </script>
+</body>
+
+</html>
